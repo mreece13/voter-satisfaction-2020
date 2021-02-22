@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap');
+
+body {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.book.font-family-1 {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.book.font-family-0 {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.book .book-body .page-wrapper .page-inner {
+  max-width: 90% !important;
+}
+
+h1, h2, h3, h4, h5, h6, .tocify {font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;}
+
+/* Styles for the bar charts */
+.bar-cell {
+  display: flex;
+  align-items: center;
+}
+
+.bar-chart {
+  flex-grow: 1;
+  margin-left: 2px;
+}
+
+.bar {
+  height: 100%;
+}

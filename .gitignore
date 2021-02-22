@@ -40,7 +40,3 @@ vignettes/*.pdf
 
 # MASON'S ADDITIONS
 /data/
-*.Rproj
-*.Rmd
-style.css
-_bookdown.yml

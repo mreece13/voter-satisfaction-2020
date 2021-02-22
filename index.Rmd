@@ -1,0 +1,151 @@
+---
+title: "Introduction"
+author: Dr. Robert Stein^[Rice University], Dr. Lonna Atkeson^[University of New Mexico], Dr. Trey Hood^[University of Georgia], Mason Reece^[Rice University undergraduate] 
+site: "bookdown::bookdown_site"
+---
+
+# Introduction
+
+Welcome to the survey results from the 2020 National Voter Satisfaction Survey you completed recently.
+
+```{r setup, include=FALSE}
+rm(list=ls())
+
+library(knitr)
+library(rmdformats)
+library(tidyverse)
+library(reactable)
+library(htmltools)
+library(showtext)
+
+## Automatically use showtext to render text for future devices
+showtext_auto()
+
+## Global options
+#options(max.print="75")
+opts_chunk$set(echo=FALSE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE,
+               fig.width = 6,
+               fig.asp = 0.8,
+               out.width = "100%")
+opts_knit$set(width=75)
+
+```
+
+```{r input, include=FALSE}
+
+df <- read_csv("data/cleaned/surveyCombined_02_01.csv", guess_max = 18000)
+
+```
+
+```{r}
+
+# Render a bar chart with a label on the left
+bar_chart <-
+  function(label,
+           width = "100%",
+           height = "14px",
+           fill = "#00bfc4",
+           background = NULL) {
+    bar <-
+      div(style = list(
+        background = fill,
+        width = width,
+        height = height
+      ))
+    chart <-
+      div(style = list(
+        flexGrow = 1,
+        marginLeft = "2px",
+        background = background
+      ),
+      bar)
+    div(style = list(display = "flex", alignItems = "center"), label, chart)
+  }
+
+freq_table <- function(data) {
+  tbl <- reactable(
+    data,
+    defaultSorted = "id",
+    showSortable = F,
+    sortable = F,
+    compact = T,
+    pagination = F,
+    defaultColDef = colDef(
+      headerClass = "header",
+      align = "left"),
+    columns = list(
+      id = colDef(name = "ID", width = 30),
+      response = colDef(name = "Response"),
+      n = colDef(
+        name = "Total",
+        align = "left",
+        # preserve white space to prevent it from being collapsed by default
+        style = list(
+          whiteSpace = "pre"),
+        width = 70,
+        format = colFormat(separators = T)
+      ),
+      percent = colDef(
+        name = "Percent",
+        cell = function(value) {
+          value <- paste0(format(value * 100, nsmall = 1, digits = 2), "%")
+          # Fix width here to align single and double-digit percentages
+          value <- format(value, width = 6, justify = "left")
+          bar_chart(value, width = value, fill = "#3fc1c9", background = "#e1e1e1")
+        },
+        align = "left",
+        style = list(
+          whiteSpace = "pre")
+      )
+    )
+  )
+  return(tbl)
+}
+
+freq_table_unsorted <- function(data) {
+  tbl <- reactable(
+    data,
+    defaultSorted = "percent",
+    defaultSortOrder = "desc",
+    showSortable = F,
+    sortable = F,
+    compact = T,
+    pagination = F,
+    defaultColDef = colDef(
+      headerClass = "header",
+      align = "left"),
+    columns = list(
+      response = colDef(name = "Response"),
+      n = colDef(
+        name = "Total",
+        align = "left",
+        # preserve white space to prevent it from being collapsed by default
+        style = list(
+          whiteSpace = "pre"),
+        width = 70,
+        format = colFormat(separators = T)
+      ),
+      percent = colDef(
+        name = "Percent",
+        cell = function(value) {
+          value <- paste0(format(value * 100, nsmall = 1, digits = 2), "%")
+          # Fix width here to align single and double-digit percentages
+          value <- format(value, width = 6, justify = "left")
+          bar_chart(value, width = value, fill = "#3fc1c9", background = "#e1e1e1")
+        },
+        align = "left",
+        style = list(
+          whiteSpace = "pre")
+      )
+    )
+  )
+  return(tbl)
+}
+
+```

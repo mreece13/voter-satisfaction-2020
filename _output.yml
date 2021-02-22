@@ -1,3 +1,9 @@
 bookdown::gitbook:
   css: style.css
   number_sections: no
+  config:
+    sharing:
+      facebook: no
+      twitter: no
+      all:
+    info: no

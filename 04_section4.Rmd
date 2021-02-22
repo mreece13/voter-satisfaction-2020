@@ -1,0 +1,104 @@
+# Section 4: Voting Experience
+
+## Q4.1: How would you rate your voting experience overall?
+
+```{r}
+
+tallies <- df %>%
+  drop_na(Q4.1_experience) %>% 
+  group_by(Q4.1_experience) %>% 
+  tally() %>% 
+  mutate(percent = n/sum(n)) %>%
+  rename(response = Q4.1_experience) %>% 
+  mutate(response = as_factor(response)) %>% 
+  mutate(response = fct_relevel(response, "Excellent", "Good", "Fair", "Poor")) %>% 
+  mutate(id = as.numeric(response)) %>%
+  select(id, everything())
+
+freq_table(tallies)
+
+
+```
+
+## Q4.2: How confident are you that <b>YOUR</b> vote in the General Election was counted as you intended?
+
+```{r}
+
+tallies <- df %>%
+  drop_na(Q4.2_confidence) %>% 
+  group_by(Q4.2_confidence) %>% 
+  tally() %>% 
+  mutate(percent = n/sum(n)) %>%
+  rename(response = Q4.2_confidence) %>% 
+  mutate(response = as_factor(response)) %>% 
+  mutate(response = fct_relevel(response, "Very confident", "Somewhat confident", "Not too confident", "Not at all confident")) %>% 
+  mutate(id = as.numeric(response)) %>%
+  select(id, everything())
+
+freq_table(tallies)
+
+
+```
+
+## Q4.3 Thinking about your county, state, and the nation, how confident are you that all of the ballots were counted as the voters intended?
+
+### Your county
+
+```{r}
+
+tallies <- df %>%
+  drop_na(Q4.3_county) %>% 
+  group_by(Q4.3_county) %>% 
+  tally() %>% 
+  mutate(percent = n/sum(n)) %>%
+  rename(response = Q4.3_county) %>% 
+  mutate(response = as_factor(response)) %>% 
+  mutate(response = fct_relevel(response, "Very Confident", "Somewhat confident", "Not too confident", "Not at all confident")) %>% 
+  mutate(id = as.numeric(response)) %>%
+  select(id, everything())
+
+freq_table(tallies)
+
+
+```
+
+### Your state
+
+```{r}
+
+tallies <- df %>%
+  drop_na(Q4.3_state) %>% 
+  group_by(Q4.3_state) %>% 
+  tally() %>% 
+  mutate(percent = n/sum(n)) %>%
+  rename(response = Q4.3_state) %>% 
+  mutate(response = as_factor(response)) %>% 
+  mutate(response = fct_relevel(response, "Very Confident", "Somewhat confident", "Not too confident", "Not at all confident")) %>% 
+  mutate(id = as.numeric(response)) %>%
+  select(id, everything())
+
+freq_table(tallies)
+
+
+```
+
+### Nationwide
+
+```{r}
+
+tallies <- df %>%
+  drop_na(Q4.3_nation) %>% 
+  group_by(Q4.3_nation) %>% 
+  tally() %>% 
+  mutate(percent = n/sum(n)) %>%
+  rename(response = Q4.3_nation) %>% 
+  mutate(response = as_factor(response)) %>% 
+  mutate(response = fct_relevel(response, "Very Confident", "Somewhat confident", "Not too confident", "Not at all confident")) %>% 
+  mutate(id = as.numeric(response)) %>%
+  select(id, everything())
+
+freq_table(tallies)
+
+
+```
+
