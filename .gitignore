@@ -41,3 +41,4 @@ vignettes/*.pdf
 # MASON'S ADDITIONS
 /data/
 *.Rmd
+.Rproj.user
