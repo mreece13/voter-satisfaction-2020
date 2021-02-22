@@ -38,4 +38,9 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
+# MASON'S ADDITIONS
 /data/
+*.Rproj
+*.Rmd
+*.css
+_bookdown.yml
