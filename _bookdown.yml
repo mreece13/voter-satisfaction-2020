@@ -1,4 +1,3 @@
 book_filename: "2020 Voter Satisfaction Survey"
 delete_merged_file: true
 output_dir: "docs"
-rmd_subdir: "./render/"
